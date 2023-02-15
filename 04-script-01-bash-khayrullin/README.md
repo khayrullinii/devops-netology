@@ -43,7 +43,7 @@ done
 
 ### Ваш скрипт:
 ```bash
-!#usr/bin/env bash
+#!usr/bin/env bash
 while ((1==1))
 do
 	curl https://localhost:4757
@@ -64,7 +64,7 @@ done
 
 ### Ваш скрипт:
 ```bash
-!#usr/bin/env bash
+#!usr/bin/env bash
 ip_a=(192.168.0.1 173.194.222.113 87.250.250.242)
 counter=0
 echo  >log
@@ -85,7 +85,7 @@ done
 
 ### Ваш скрипт:
 ```bash
-!#usr/bin/env bash
+#!usr/bin/env bash
 ip_a=(192.168.0.1 173.194.222.113 87.250.250.242)
 res=0
 echo  >log
@@ -114,7 +114,17 @@ done
 
 ### Ваш скрипт:
 ```bash
-???
+хук в файле commit-msg
+
+#!/bin/sh
+
+PATTERN="\[\w*-\w*-\w*-\w*\]\s*\S*"
+MSG=$(cat "$1")
+if  ! [[ $MSG =~ $PATTERN ]]
+then
+  echo "Неверное сообщение к коммиту, он должен сожержать номер и название урока в следующем виде [XX-name-XX-name]"
+  exit 1
+fi
 ```
 
 ----
