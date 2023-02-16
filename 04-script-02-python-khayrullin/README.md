@@ -44,14 +44,24 @@ for result in result_os.split('\n'):
 ```
 
 ### Ваш скрипт:
+Что бы цикл не прерывался при первом попадании в if, убрал брейк. В принт добавил pwd (путь до текущей директории)
 ```python
-???
+import os
+
+bash_command = ["cd ~/netology/sysadm-homeworks/devops-netology", "git status"]
+result_os = os.popen(' && '.join(bash_command)).read()
+is_change = False
+for result in result_os.split('\n'):
+    if result.find('modified') != -1:
+         prepare_result = result.replace('\tmodified:   ', '')
+         print(f"{os.popen('pwd').read()} {prepare_result}\n")
+
+
 ```
 
 ### Вывод скрипта при запуске при тестировании:
-```
-???
-```
+![2](img/2.png)
+
 
 ------
 
@@ -61,13 +71,20 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-???
+import os, sys
+
+result_os = os.popen(f'cd {sys.argv[1]} && git status ').read()
+is_change = False
+for result in result_os.split('\n'):
+    if result.find('modified') != -1:
+         prepare_result = result.replace('\tmodified:   ', '')
+         print(f"{os.popen('pwd').read()} {prepare_result}\n")
+
 ```
 
 ### Вывод скрипта при запуске при тестировании:
-```
-???
-```
+![3](img/3.png)
+
 
 ------
 
@@ -86,13 +103,24 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-???
+import socket
+
+history={'drive.google.com': '','mail.google.com': '','google.com': ''}
+urls = ['drive.google.com', 'mail.google.com', 'google.com']
+while True:
+    for url in urls:
+        ip_ad = socket.gethostbyname(url)
+        if history[url] == ip_ad:
+            print(f'{url} - {ip_ad}')
+        else:
+            print(f"[ERROR] {url} IP mismatch: {history[url]} {ip_ad}")
+            history[url] = ip_ad
+
 ```
 
 ### Вывод скрипта при запуске при тестировании:
-```
-???
-```
+![4](img/4.png)
+
 
 ------
 
