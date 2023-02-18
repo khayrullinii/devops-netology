@@ -143,12 +143,27 @@ while True:
 
 ### Ваш скрипт:
 ```python
-???
+import os, sys
+
+branch_name = os.popen(f'git status ').read()
+
+for branch in branch_name.split('\n'):
+    if branch.find('branch') != -1:
+         branch_result = branch.replace('# On branch ', '')
+try:
+    if sys.argv[1] != '':
+        param = f""" "title":"{sys.argv[1]}","body":"{sys.argv[1]}","head":"khayrullinii:{branch_result}","base":"master" """
+        symb = ['{', '}']
+        PR = os.popen(f"""curl   -X POST   -H "Accept: application/vnd.github+json"   -H "X-GitHub-Api-Version: 2022-11-28"   -H "Authorization: Bearer <сюда вставляем токен с удаленного репозитория>"  https://api.github.com/repos/khayrullinii/devops-netology/pulls   -d '{symb[0]}{param}{symb[1]}'""").read()
+        print(PR)
+except:
+    print('введите сообщение первым аргументом после вызова скрипта')
+
 ```
 
 ### Вывод скрипта при запуске при тестировании:
-```
-???
-```
+
+![5](img/5.png)
+
 
 ----
