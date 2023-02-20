@@ -98,11 +98,51 @@ mail.google.com: 64.233.164.18
 
 ### Ваш скрипт:
 ```python
-???
+import socket,yaml,json,sys,traceback,os,time
+
+
+file_name = sys.argv[1]
+ex = file_name.split('.')
+new_file = []
+r = os.popen(f"cat {sys.argv[1]} | grep -E '^-\s*\w+'").read()
+
+
+if len(r) == 0 and ex[1] == "yml":
+    ex[1] = 'json'
+elif len(r) != 0 and ex[1] == "json":
+    ex[1] = 'yml'
+    
+ 
+if ex[1] == "json":
+    with open(f'{file_name}', 'r') as js:
+        try:
+            new_file = json.load(js)
+        except Exception as e:
+            result_trac =traceback.format_exc()
+            for result in result_trac.split('\n'):
+                if result.find('Expecting') != -1:
+                    prepare_result = result.replace('json.decoder.JSONDecodeError: ', '')
+                    print(f'Ошибка:{prepare_result}\n')
+            sys.exit()        
+    with open(f'{ex[0]}.yml', 'w') as ym:
+        ym.write(yaml.dump(new_file))
+elif ex[1] == "yml":
+    with open(f'{file_name}', 'r') as ym:
+        try:
+            new_file = yaml.safe_load(ym)
+        except Exception as e:
+            print(traceback.format_exc())
+            sys.exit() 
+    with open(f'{ex[0]}.json', 'w') as js:
+        js.write(json.dumps(new_file))
+else:
+    print("Не подходящее расширение файла")
 ```
 
 ### Пример работы скрипта:
-???
+![2](img/2.png)
+
+![3](img/3.png)
 
 ----
 
