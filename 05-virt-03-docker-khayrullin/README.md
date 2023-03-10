@@ -75,7 +75,7 @@ https://hub.docker.com/r/khayrullinii/netology_nginx_khayrullinii
 ![3](img/3.png)
 
 		#Ход выполнения:
-		Создаем папку на хостовой ВМ (mkdir data)
+		 Создаем папку на хостовой ВМ (mkdir data)
 		docker run -t -d -v ./data:/data centos  (запуск контейнера centos)
 		docker run -t -d -v ./data:/data debian  (запуск контейнера debian)
 		заходим в контейнер и создаем в папке data файл
