@@ -74,6 +74,22 @@ https://hub.docker.com/r/khayrullinii/netology_nginx_khayrullinii
 И создав файлы в разных местах, я получил везде одинаковое наполнение директории data:
 ![3](img/3.png)
 
+		#Ход выполнения:
+		Создаем папку на хостовой ВМ (mkdir data)
+		docker run -t -d -v ./data:/data centos  (запуск контейнера centos)
+		docker run -t -d -v ./data:/data debian  (запуск контейнера debian)
+		заходим в контейнер и создаем в папке data файл
+		docker exec -it 96f164d7e37d /bin/bash  (проваливаемся в shell)
+			echo test -> /data/text.txt
+		возвращаемся на хостовую ВМ и создаем в той же папке другой файл
+		echo host -> /data/host.txt
+		заходим в другой контейнер и выводим список файлов в директории data
+		docker exec -it 8c1ecf62e788 /bin/bash
+			cd data/ && ls
+		
+		
+		
+
 ## Задание 4*
 Воспроизведите практическую часть лекции самостоятельно.
 
@@ -81,3 +97,11 @@ https://hub.docker.com/r/khayrullinii/netology_nginx_khayrullinii
 
 ## Ответ:
 https://hub.docker.com/r/khayrullinii/netology
+		
+		#Ход выполнения:
+		копируем файл dockerfile (если докерфайл с таким, то название можно при вызове build не указывать, иначе ключ -f и указать название)
+		собираем image
+			docker build . -t khayrullinii/netology:0.0.1 
+		после чего проверяем создался ли image и пушим в registry
+			docker login -u {username} -p {password}
+			docker push khayrullinii/netology:0.0.1
