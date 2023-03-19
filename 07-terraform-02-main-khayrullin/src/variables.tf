@@ -39,4 +39,21 @@ variable "image_family" {
 }
 
 
+variable "image_family" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "yandex compute image family"
+}
 
+variable "vm_env" {
+  type        = string
+  default     = "develop"
+  description = "project env"
+}
+
+
+variable "vm_project" {
+  type        = string
+  default     = "platform"
+  description = "project platform"
+}
