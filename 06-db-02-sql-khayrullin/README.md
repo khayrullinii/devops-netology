@@ -87,7 +87,19 @@
 - результаты их выполнения.
 
 ## Ответ:
-
+![5](img/5.png)
+ 
+    test=# select count(*) from clients;
+     count
+    -------
+         5
+    (1 row)
+    
+    test=# select count(*) from orders;
+     count
+    -------
+         5
+    (1 row)
 ## Задание 4 
 Часть пользователей из таблицы clients решили оформить заказы из таблицы orders.
 
@@ -98,6 +110,22 @@
 
 ## Ответ:
 
+    test=# UPDATE clients SET "заказ" = (SELECT id FROM orders WHERE "наименование"='Книга') WHERE "Фамилия"='Иванов Иван Ив
+    анович';
+    UPDATE 1
+    test=# UPDATE clients SET "заказ" = (SELECT id FROM orders WHERE "наименование"='Монитор') WHERE "Фамилия"='Петров Петр
+    Петрович';
+    UPDATE 1
+    test=# UPDATE clients SET "заказ" = (SELECT id FROM orders WHERE "наименование"='Гитара') WHERE "Фамилия"='Иоганн Себаст
+    ьян Бах';
+    UPDATE 1
+    test=# SELECT c.* FROM clients c JOIN orders o ON c.заказ = o.id;
+     id |       Фамилия        | Страна проживания | заказ
+    ----+----------------------+-------------------+-------
+      1 | Иванов Иван Иванович | USA               |     5
+      2 | Петров Петр Петрович | Canada            |     3
+      3 | Иоганн Себастьян Бах | Japan             |     4
+    (3 rows)
 
 
 ## Задание 5 
@@ -107,6 +135,25 @@
 
 ## Ответ:
 
+    test=# explain analyze verbose SELECT c.* FROM clients c JOIN orders o ON c.заказ = o.id;
+                                                           QUERY PLAN
+    -------------------------------------------------------------------------------------------------------------------------
+     Hash Join  (cost=37.00..57.24 rows=810 width=72) (actual time=0.222..0.226 rows=3 loops=1)
+       Output: c.id, c."Фамилия", c."Страна проживания", c."заказ"
+       Inner Unique: true
+       Hash Cond: (c."заказ" = o.id)
+       ->  Seq Scan on public.clients c  (cost=0.00..18.10 rows=810 width=72) (actual time=0.020..0.021 rows=5 loops=1)
+             Output: c.id, c."Фамилия", c."Страна проживания", c."заказ"
+       ->  Hash  (cost=22.00..22.00 rows=1200 width=4) (actual time=0.127..0.128 rows=5 loops=1)
+             Output: o.id
+             Buckets: 2048  Batches: 1  Memory Usage: 17kB
+             ->  Seq Scan on public.orders o  (cost=0.00..22.00 rows=1200 width=4) (actual time=0.016..0.020 rows=5 loops=1)
+                   Output: o.id
+     Planning Time: 0.224 ms
+     Execution Time: 0.462 ms
+    (13 rows)
+
+Команда выводит название столбцов таблицы clients, и построчно сверяет хэши элементов столбца "заказ" таблицы клиент с хэшами элементов столбца id таблицы orders. При совпадении выводит текущую строчку. Запрос прошел за 0.686 ms.
 
 ## Задание 6
 Создайте бэкап БД test_db и поместите его в volume, предназначенный для бэкапов (см. задачу 1).
@@ -118,3 +165,14 @@
 Приведите список операций, который вы применяли для бэкапа данных и восстановления.
 
 ## Ответ:
+Для бекапа:
+    
+    pg_dumpall  -U test > /home/ilnur/06-db/backup/test_db.sql     
+
+Для развертывания:
+
+    docker run --rm -d -e POSTGRES_USER=test -e POSTGRES_PASSWORD=123 -e POSTGRES_DB=test_db -v ilnur_backup:/home/ilnur/06-db/backup --name postgresql2 postgres:12
+
+Для восстановления:
+
+     psql  -U test -f /home/ilnur/06-db/backup/test_db.sql test_db
