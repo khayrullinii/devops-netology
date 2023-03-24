@@ -1,7 +1,6 @@
 resource "yandex_compute_instance" "each_vm" {
   depends_on = [resource.yandex_compute_instance.count_vm]
-  for_each = {"netology-each-1" = { cpu=2, ram=2, disk=15},
-            "netology-each-2" = { cpu=4, ram=4, disk=10}}
+  for_each = var.each_vm
   name        = each.key
   resources {
     cores         = each.value.cpu

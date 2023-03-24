@@ -45,3 +45,8 @@ variable "vm_resources" {
         core_fraction = 5
     }
 }
+
+variable "each_vm"{
+  default = {"netology-each-1" = { cpu=2, ram=2, disk=15},
+            "netology-each-2" = { cpu=4, ram=4, disk=10}}
+}
