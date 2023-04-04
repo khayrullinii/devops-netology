@@ -42,12 +42,13 @@
 Приведите в ответе команду, которую вы использовали для вычисления, и полученный результат.
 
 ### Ответ:
+Команда для поиска столбца с наибольшим средним значением размера элементов в байтах:
 
-test_database=# SELECT attname, avg_width FROM pg_stats WHERE tablename = 'orders' ORDER BY avg_width DESC LIMIT 1;
- attname | avg_width
----------+-----------
- title   |        16
-(1 row)
+    test_database=# SELECT attname, avg_width FROM pg_stats WHERE tablename = 'orders' ORDER BY avg_width DESC LIMIT 1;
+     attname | avg_width
+    ---------+-----------
+     title   |        16
+    (1 row)
 
 ## Задание 3
 Архитектор и администратор БД выяснили, что ваша таблица orders разрослась до невиданных размеров и поиск по ней занимает долгое время. Вам как успешному выпускнику курсов DevOps в Нетологии предложили провести разбиение таблицы на 2: шардировать на orders_1 - price>499 и orders_2 - price<=499.
@@ -57,6 +58,16 @@ test_database=# SELECT attname, avg_width FROM pg_stats WHERE tablename = 'order
 Можно ли было изначально исключить ручное разбиение при проектировании таблицы orders?
 
 ## Ответ:
+Транзакции для шардирования:
+
+    create table public.orders_0 (like public.orders) partition by range(price);
+    create table public.orders_1 partition of public.orders_0 for values from (499) to (999999999);
+    create table public.orders_2 partition of public.orders_0 for values from (0) to (499);
+    insert into public.orders_0 (id,title,price) select*from public.orders;
+
+![1](img/1.png)
+
+Безусловно можно изначально разбивать на партиции с необходимыми ограничениями, чтобы данные записывались в партиции в равных долях.
 
 ## Задание 4 
 Используя утилиту pg_dump, создайте бекап БД test_database.
@@ -65,3 +76,10 @@ test_database=# SELECT attname, avg_width FROM pg_stats WHERE tablename = 'order
 
 ## Ответ:
 
+Для снятия дампа базы:
+
+    pg_dump -U test test_database > /var/lib/pg/test_database.sql
+
+Доработал бы добавлением параметера "unique" в строчки, где описывается title при создании таблиц. В итоге эти строчки выглядяли бы следующим образом:
+
+    title character varying(80) unique NOT NULL
