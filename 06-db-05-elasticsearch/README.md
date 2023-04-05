@@ -64,6 +64,7 @@
         
         USER 1000
         
+        CMD ["/var/lib/elasticsearch/elasticsearch-7.14.0/bin/elasticsearch"]
         
 
 Ссылка на репозиторий с образом: https://hub.docker.com/repository/docker/khayrullinii/netology_elastic/general
