@@ -307,3 +307,9 @@ output "vault_example" {
 Обратиться к сожалению не смог:
 
 ![9](img/9.png)
+
+C подсказки, так можно получить креды
+
+    output "vault_example" {
+     value = "${nonsensitive(data.vault_generic_secret.vault_example.data)}"
+    }
