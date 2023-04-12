@@ -37,7 +37,7 @@
 
 Для принудительной разблокировки:
 
-      terraform plan -lock=false
+      terraform force-unlock <LOCK_ID>
 
 ![4](img/4.png)
 
