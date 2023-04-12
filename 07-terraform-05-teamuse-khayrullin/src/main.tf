@@ -2,7 +2,9 @@ terraform {
   required_providers {
     yandex = {
       source = "yandex-cloud/yandex"
+      version = "~> 1.0"
     }
+    template = "~> 2.0"
   }
   required_version = ">=0.13"
 
@@ -40,7 +42,7 @@ module "vpc_module" {
 }
 
 module "test-vm" {
-  source          = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
+  source          = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=v1.0.0"
   env_name        = "develop"
   network_id      = module.vpc_module.vpc.id
   subnet_zones    = ["ru-central1-a"]
