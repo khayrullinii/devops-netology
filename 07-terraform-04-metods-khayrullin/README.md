@@ -293,7 +293,7 @@ data "vault_generic_secret" "vault_example"{
  path = "secret/example"
 }
 output "vault_example" {
- value = "${data.vault_generic_secret.vault_example.data["value"]}"
+ value = "${data.vault_generic_secret.vault_example.data["key"]}"
 }
 ```
 5. Попробуйте разобраться в документации и записать новый секрет в vault с помощью terraform. 
