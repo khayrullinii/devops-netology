@@ -50,6 +50,7 @@
 
 ## Ответ:
 
+[Pull Request](https://github.com/khayrullinii/devops-netology/pull/9)
 
 ## Задание 4 (*)
 1. Напишите переменные с валидацией:
@@ -76,9 +77,53 @@ variable "in_the_end_there_can_be_only_one" {
 ```
 
 ## Ответ:
+```
+variable "ip_address" {
+  type        = string
+  description = "ip-адрес"
+  validation {
+        error_message = "IP address is incorrect"
+        condition = can(cidrnetmask(var.ip_address))
+    }
+}
 
 
+variable "ip_address_list" {
+  type        = list(string)
+  description = "список ip-адресов"
+  validation {
+        error_message = "one of the IP addresses is incorrect"
+        condition = alltrue([
+      for a in var.ip_address_list : can(cidrnetmask(a))
+    ])
+    }
+}
 
+variable "string_letter" {
+  type        = string
+  description = "любая строка"
+  validation {
+        error_message = "String contains uppercase letters"
+        condition = (can(var.string_letter) && var.string_letter == lower(var.string_letter))
+    }
+}
+
+variable "in_the_end_there_can_be_only_one" {
+    description="Who is better Connor or Duncan?"
+    type = object({
+        Dunkan = optional(bool)
+        Connor = optional(bool)
+    })
+    default = {
+        Dunkan = true
+        Connor = false
+    }
+    validation {
+        error_message = "There can be only one MacLeod"
+        condition = try(var.in_the_end_there_can_be_only_one["Dunkan"] != var.in_the_end_there_can_be_only_one["Connor"])
+    }
+}
+```
 ## Задание 5 (**)
 
 1. Настройте любую известную вам CI/CD или замените ее самописным bash/python скриптом.
