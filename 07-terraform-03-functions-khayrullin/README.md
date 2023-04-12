@@ -79,3 +79,6 @@
          %{ else }
             ${i["name"]}   ansible_host=${i["network_interface"][0]["ip_address"]}
          %{ endif }  
+ P.S. исправил
+
+           ${i["name"]}   ansible_host=${i["network_interface"][0]["nat_ip_address"] != "" ?   ansible_host=${i["network_interface"][0]["nat_ip_address"]} : ${i["name"]}   ansible_host=${i["network_interface"][0]["ip_address"]}
