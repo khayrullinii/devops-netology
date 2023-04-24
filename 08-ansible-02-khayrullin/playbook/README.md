@@ -13,4 +13,4 @@ rpm файлы для установки скачиваются с https://packa
 
        ansible-playbook -i {путь до файла}/inventory/prod.yml {путь до файла}/site.yml
 - Для установки одной из утилит воспользуйтесь тегами "clickhouse" или "vector"
-- Для выбора версии утилит, измените соответствующее значение в group_vars/clickhouse/vars.yml для clickhouse и vector
+- Для выбора версии утилиты, измените соответствующее значение в group_vars/clickhouse/vars.yml для clickhouse и vector
