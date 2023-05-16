@@ -1,0 +1,27 @@
+---
+- name: Install Clickhouse
+  hosts: clickhouse
+  remote_user: centos
+  roles:
+    - clickhouse
+  tags:
+    - clickhouse
+- name: Install vector
+  hosts: vector
+  remote_user: centos
+  roles:
+    - vector-role
+  tags:
+    - vector
+- name: Install nginx
+  hosts: lighthouse
+  remote_user: centos
+  pre_tasks:
+    - name: install git
+      become: true
+      ansible.builtin.yum:
+        name: git
+  roles:
+    - lighthouse-role
+  tags:
+    - lighthouse
