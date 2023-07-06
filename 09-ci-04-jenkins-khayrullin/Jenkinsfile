@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('molecule test') {
+            steps {
+                sh 'cd /opt/jenkins_agent/workspace/free/ && molecule test'
+            }
+        }
+    }
+}
