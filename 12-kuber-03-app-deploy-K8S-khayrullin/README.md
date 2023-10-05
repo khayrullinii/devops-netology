@@ -28,9 +28,11 @@
 Создал [Deployment](https://github.com/khayrullinii/devops-netology/blob/master/12-kuber-03-app-deploy-K8S-khayrullin/deployment.yaml) с двумя контейнерами ( ошибку нашел, заглянув в логи контейнера! logs <pod name> <container name>)
 
 Скриншот с одной репликой:
+
 ![1](img/1.png)
 
-Скриншот с двумя репликой:
+Скриншот с двумя репликами:
+
 ![2](img/2.png)
 
 Создал [service](https://github.com/khayrullinii/devops-netology/blob/master/12-kuber-03-app-deploy-K8S-khayrullin/svc.yaml) для доступа до приложений.
@@ -38,6 +40,7 @@
 Создал pod для проверки командой: kubectl run multitool --image=wbitt/network-multitool
 
 скриншоты курла по доменному имени сервиса:
+
 ![3](img/3.png)
 
 
@@ -46,7 +49,9 @@
 Создал [Deployment](https://github.com/khayrullinii/devops-netology/blob/master/12-kuber-03-app-deploy-K8S-khayrullin/ngnix.yaml) для nginx и [service](https://github.com/khayrullinii/devops-netology/blob/master/12-kuber-03-app-deploy-K8S-khayrullin/ngsvc.yaml) для доступа к приложению.
 
 Скриншот после запуска Deployment:
+
 ![4](img/4.png)
 
 Скриншот после запуска service:
+
 ![5](img/5.png)
