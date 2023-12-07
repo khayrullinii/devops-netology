@@ -28,7 +28,7 @@
 ## Ответ:
 
 
-1. Cоздал [бакет]([main](https://github.com/khayrullinii/devops-netology/blob/master/14-cloud-02-balancer-khayrullin/bucket.tf)) и разместил в нем файл
+1. Cоздал [бакет](https://github.com/khayrullinii/devops-netology/blob/master/14-cloud-02-balancer-khayrullin/bucket.tf) и разместил в нем файл
 
 ![1](img/1.png)
 
