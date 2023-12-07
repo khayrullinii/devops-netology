@@ -32,16 +32,16 @@
 
 ![1](img/1.png)
 
-2.  Развернул 3 ВМ через  [instance group]([instance](https://github.com/khayrullinii/devops-netology/blob/master/14-cloud-02-balancer-khayrullin/instance.tf)) 
+2.  Развернул 3 ВМ через  [instance group](https://github.com/khayrullinii/devops-netology/blob/master/14-cloud-02-balancer-khayrullin/instance.tf)
 
 ![2](img/2.png)
 
 ![3](img/3.png)
 
-3. Подцепил к группе [network balancer]([balancer](https://github.com/khayrullinii/devops-netology/blob/master/14-cloud-02-balancer-khayrullin/balancer.tf))
+3. Подцепил к группе [network balancer](https://github.com/khayrullinii/devops-netology/blob/master/14-cloud-02-balancer-khayrullin/balancer.tf)
 
 ![4](img/4.png)
 
-4. Создал [Application Load Balancer]([Application Load Balancer](https://github.com/khayrullinii/devops-netology/blob/master/14-cloud-02-balancer-khayrullin/app_balancer.tf)) и подцепил к созданной ранее IG.
+4. Создал [Application Load Balancer](https://github.com/khayrullinii/devops-netology/blob/master/14-cloud-02-balancer-khayrullin/app_balancer.tf) и подцепил к созданной ранее IG.
 
 ![5](img/5.png)

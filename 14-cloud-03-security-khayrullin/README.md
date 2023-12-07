@@ -20,7 +20,7 @@
 ## Ответ:
 
 
-1. Cоздал [бакет]([main](https://github.com/khayrullinii/devops-netology/blob/master/14-cloud-03-security-khayrullin/bucket.tf)) и зашифровал с помощью ключа содержимое
+1. Cоздал [бакет](https://github.com/khayrullinii/devops-netology/blob/master/14-cloud-03-security-khayrullin/bucket.tf) и зашифровал с помощью ключа содержимое
 
 ![1](img/1.png)
 
