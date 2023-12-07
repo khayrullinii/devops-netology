@@ -111,4 +111,3 @@ resource "yandex_compute_instance" "private" {
     ssh-keys           = "ubuntu:${local.server_ssh_key}"
   }
 }
-
