@@ -56,9 +56,9 @@
 
 2) Создал сервис для доступа к  [grafana](https://github.com/khayrullinii/devops-netology/tree/master/devops-diplom-2024-khayrullin/kube_config/grafana.tf) графана доступна по [адресу](http://51.250.0.118:30100/)
 
-3) Создал манифест для деплоя [тестового приложения](https://github.com/khayrullinii/devops-netology/tree/master/devops-diplom-2024-khayrullin/kube_config/deploy.tf) и запустил [приложение](http://51.250.79.11:30080/)
+3) Создал манифест для деплоя [тестового приложения](https://github.com/khayrullinii/devops-netology/tree/master/devops-diplom-2024-khayrullin/kube_config/deploy.tf) и запустил [приложение](http://158.160.58.249:30080/)
 
-### Установка и настройка CI/CD'
+### Установка и настройка CI/CD
 
 1) Развернул [jenkins](http://178.154.205.122:8080/) и agenta, подцепил агента, создал SC Pipeline
 
