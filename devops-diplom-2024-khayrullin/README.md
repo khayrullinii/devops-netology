@@ -69,13 +69,13 @@
          	--namespace=monitoring
          kubectl apply -f manifests/
 
-2) Создал сервис для доступа к  [grafana](https://github.com/khayrullinii/devops-netology/tree/master/devops-diplom-2024-khayrullin/kube_config/grafana.tf) графана доступна по [адресу](http://158.160.116.57:30003//)
+2) Создал сервис для доступа к  [grafana](https://github.com/khayrullinii/devops-netology/tree/master/devops-diplom-2024-khayrullin/kube_config/grafana.tf) графана доступна по [адресу](http://158.160.116.57:30003/)
 
        Можно не создавать отдельный сервис, а изменить type сервиса manifests/grafana-service.yaml на nodeport и указать порт внешного адреса, только после этого задеплоить. Если доступа по порту так и не появилось, попробуйте удалить networkpolicy(kubectl -n monitoring delete networkpolicies.networking.k8s.io --all), если проблема доступ появится измените файл  manifests/grafana-networkPolicy.yaml
 
 ![2](img/2.png)
 
-3) Создал манифест для деплоя [тестового приложения](https://github.com/khayrullinii/devops-netology/tree/master/devops-diplom-2024-khayrullin/kube_config/deploy.tf) и запустил [приложение](http://158.160.116.57:30080//)
+3) Создал манифест для деплоя [тестового приложения](https://github.com/khayrullinii/devops-netology/tree/master/devops-diplom-2024-khayrullin/kube_config/deploy.tf) и запустил [приложение](http://158.160.116.57:30080/)
 
 ![5](img/5.png)
 
